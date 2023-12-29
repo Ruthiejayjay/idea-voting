@@ -16,7 +16,7 @@ new class extends Component
     }
 }; ?>
 
-<div class=" p-6">
+<div class=" mt-2 md:mt-0 p-6">
     @auth
         {{-- <a href="/" class="font-semibold text-gray-600 hover:text-gray-900 focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500" wire:navigate>Home</a> --}}
         <button wire:click="logout" class="w-full text-start">
