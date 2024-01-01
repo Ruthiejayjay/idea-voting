@@ -12,35 +12,28 @@
             <div class="flex flex-col md:flex-row flex-1 px-2 py-6">
                <div class="mx-2 md:mx-0 flex-none">
                 <a href="#">
-                    <img src="https://source.unsplash.com/200x200/?face&crop=face&v=1" alt="avatar" class="w-14 h-14 rounded-xl">
+                    <img src="{{ $idea->user->getAvatar() }}" alt="avatar" class="w-14 h-14 rounded-xl">
                 </a>
                </div>
                 <div class="w-full mx-2 md:mx-4">
                     <h4 class="text-xl font-semibold">
-                        <div>A random title can go here</div>
+                        <div>{{ $idea->title }}</div>
                     </h4>
                     <div class="text-gray-600 mt-3">
-                        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Rerum fugiat illo quasi, labore excepturi maxime 
-                        autem nobis ipsum itaque atque repellendus amet ducimus? Repudiandae odit cumque quidem consectetur iste 
-                        molestias, natus officiis sed totam dolorem sapiente magnam debitis voluptate adipisci impedit tempora 
-                        voluptas eius officia quisquam! Sunt dicta nostrum quis quisquam, eum, aspernatur accusamus et, unde iste 
-                        laborum? Totam, enim esse quia accusantium sed voluptatum inventore accusamus natus, ipsum temporibus 
-                        asperiores odit ipsa provident quod unde maiores eligendi? Repudiandae quisquam voluptas eum consequuntur 
-                        vero vel odio? Autem, eligendi unde atque, ut voluptate fugiat, eos earum exercitationem doloribus molestias 
-                        eveniet.
+                        {{ $idea->description }}
                     </div>
                     <div class="flex flex-col md:flex-row md:items-center justify-between mt-6">
                         <div class="flex items-center text-xs text-gray-400 font-semibold space-x-2">
-                            <div class="hidden md:block font-bold text-gray-900">John Doe</div>
+                            <div class="hidden md:block font-bold text-gray-900">{{ $idea->user->name }}</div>
                             <div class="hidden md:block">&bull;</div>
-                            <div>10 hours ago</div>
+                            <div>{{ $idea->created_at->diffForHumans() }}</div>
                             <div>&bull;</div>
-                            <div>Category 1</div>
+                            <div>{{ $idea->category->name }}</div>
                             <div>&bull;</div>
                             <div class="text-gray-900">3 Comments</div>
                         </div>
                         <div x-data="{ isOpen: false }" class="flex items-center space-x-2 mt-4 md:mt-0">
-                            <div class="bg-gray-200 text-xxs font-bold uppercase leading-none rounded-full text-center w-28 h-7 py-2 px-4">Open</div>
+                            <div class="{{ $idea->status->classes }} text-xxs font-bold uppercase leading-none rounded-full text-center w-28 h-7 py-2 px-4">{{ $idea->status->name}}</div>
                             <button 
                                 @click="isOpen = !isOpen"
                                 class="relative bg-gray-100 hover:bg-gray-200 rounded-full h-7 border transition duration-150 ease-in py-2 px-3">
