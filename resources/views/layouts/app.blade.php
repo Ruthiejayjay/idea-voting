@@ -68,7 +68,7 @@
                         class="inline-block mt-4 w-1/2 h-11 text-xs bg-gray-200 font-semibold rounded-xl border border-gray-200 hover:border-gray-400 transition duration-150 ease-in px-6 py-3"
                     >
                       
-                        Sign Uo
+                        Sign Up
                     </a>
                 </div>
             @endauth
