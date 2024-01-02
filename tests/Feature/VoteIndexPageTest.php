@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Livewire\IdeaIndex;
+use App\Livewire\IdeasIndex;
 use App\Models\Category;
 use App\Models\Idea;
 use App\Models\Status;
@@ -38,7 +39,7 @@ class VoteIndexPageTest extends TestCase
     }
 
     /** @test */
-    public function index_page_correctly_receives_votes_count()
+    public function ideas_index_livewire_component_correctly_receives_votes_count()
     {
         $user = User::factory()->create();
         $userB = User::factory()->create();
@@ -65,12 +66,11 @@ class VoteIndexPageTest extends TestCase
             'user_id' => $userB->id,
         ]);
 
-        $this->get(route('ideas.index'))
+        Livewire::test(IdeasIndex::class)
             ->assertViewHas('ideas', function ($ideas) {
                 return $ideas->first()->votes_count == 2;
             });
     }
-
 
     /** @test */
     public function votes_count_shows_correctly_on_index_page_livewire_component()
@@ -119,15 +119,12 @@ class VoteIndexPageTest extends TestCase
             'idea_id' => $idea->id,
             'user_id' => $user->id,
         ]);
-
-        $response = $this->actingAs($user)->get(route('ideas.index'));
-
-        $ideaWithVotes = $response['ideas'];
-        dd($ideaWithVotes);
+        $idea->votes_count = 1;
+        $idea->voted_by_user = 1;
 
         Livewire::actingAs($user)
             ->test(IdeaIndex::class, [
-                'idea' => $ideaWithVotes,
+                'idea' => $idea,
                 'votesCount' => 5,
             ])
             ->assertSet('hasVoted', true)
@@ -219,13 +216,12 @@ class VoteIndexPageTest extends TestCase
             'user_id' => $user->id,
         ]);
 
-        $response = $this->actingAs($user)->get(route('ideas.index'));
-
-        $ideaWithVotes = $response['ideas']->items()[0];
+        $idea->votes_count = 1;
+        $idea->voted_by_user = 1;
 
         Livewire::actingAs($user)
             ->test(IdeaIndex::class, [
-                'idea' => $ideaWithVotes,
+                'idea' => $idea,
                 'votesCount' => 5,
             ])
             ->call('vote')
