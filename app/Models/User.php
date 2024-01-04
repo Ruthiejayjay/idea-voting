@@ -78,4 +78,13 @@ class User extends Authenticatable
         //     . '?s200'
         //     . '&d=robohash';
     }
+
+    public function isAdmin()
+    {
+        return in_array($this->email,[
+            'ruthiejay022@gmail.com',
+            'rm@rm.com',
+            // 'v@v.com'
+        ]);
+    }
 }
