@@ -23,7 +23,7 @@ class UserTest extends TestCase
         $gravatarUrl = $user->getAvatar();
 
         $this->assertEquals(
-            'https://www.gravatar.com/avatar/'.md5($user->email).'?s=200&d=https://s3.amazonaws.com/laracasts/images/forum/avatars/default-avatar-1.png',
+            'https://www.gravatar.com/avatar/' . md5($user->email) . '?s=200&d=https://s3.amazonaws.com/laracasts/images/forum/avatars/default-avatar-1.png',
             $gravatarUrl
         );
 
@@ -42,12 +42,35 @@ class UserTest extends TestCase
         $gravatarUrl = $user->getAvatar();
 
         $this->assertEquals(
-            'https://www.gravatar.com/avatar/'.md5($user->email).'?s=200&d=https://s3.amazonaws.com/laracasts/images/forum/avatars/default-avatar-26.png',
+            'https://www.gravatar.com/avatar/' . md5($user->email) . '?s=200&d=https://s3.amazonaws.com/laracasts/images/forum/avatars/default-avatar-26.png',
             $gravatarUrl
         );
 
         $response = Http::get($user->getAvatar());
 
         $this->assertTrue($response->successful());
+    }
+
+    /** @test */
+    public function can_check_if_user_is_an_admin()
+    {
+        $user = User::factory()->make([
+            'name' => 'Andre',
+            'email' => 'andre_madarang@hotmail.com',
+        ]);
+
+        $userB = User::factory()->make([
+            'name' => 'Andre',
+            'email' => 'user@user.com',
+        ]);
+
+        $userC = User::factory()->make([
+            'name' => 'Kim Namjoon',
+            'email' => 'ruthiejay022@gmail.com',
+        ]);
+
+        $this->assertTrue($userC->isAdmin());
+        $this->assertFalse($user->isAdmin());
+        $this->assertFalse($userB->isAdmin());
     }
 }
