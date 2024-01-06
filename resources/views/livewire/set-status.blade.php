@@ -1,11 +1,8 @@
 <div 
     x-data="{ isOpen: false }" 
     class="relative" 
-    x-init="
-        Livewire.on('statusWasUpdated', () => {
-            isOpen = false
-        })
-    "
+    x-init="$wire.on('statusWasUpdated', () => {isOpen = false})"
+
 >
     <button
         @click="isOpen = !isOpen"
