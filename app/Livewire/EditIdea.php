@@ -43,8 +43,9 @@ class EditIdea extends Component
             'category_id' => $this->category,
             'description' => $this->description,
         ]);
-
+        session()->flash('success_message','Idea was updated Successfully!');
         $this->dispatch('ideaWasUpdated');
+       
     }
 
     public function render()

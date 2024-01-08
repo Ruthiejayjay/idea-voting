@@ -7,7 +7,10 @@
             <span class="ml-2">All ideas (or back to chosen category with filters)</span>
         </a>
     </div>
-    <livewire:idea-show :idea="$idea" :votesCount="$votesCount"/>
+    <livewire:idea-show :idea="$idea" :votesCount="$votesCount"/>    
+
+    <x-notification-success />
+
 
     <x-modals-container :idea="$idea" />
       
