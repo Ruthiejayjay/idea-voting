@@ -5,15 +5,17 @@
             $wire.on('commentWasAdded', () => {
                 isOpen = false
             })
-             Livewire.hook('message.processed', (message, component) => {
-                if (message.updateQueue[0].payload.event === 'commentWasAdded'
-                 && message.component.fingerprint.name === 'idea-comments') {
-                    const lastComment = document.querySelector('.comment-container:last-child')
-                    lastComment.scrollIntoView({ behavior: 'smooth'})
-                    lastComment.classList.add('bg-green-50')
+            Livewire.hook('message.processed', (message, component) => {
+                if (
+                    message.updateQueue[0].payload.event === 'commentWasAdded' &&
+                    component.fingerprint.name === 'idea-comments'
+                ) {
+                    const lastComment = document.querySelector('.comment-container:last-child');
+                    lastComment.scrollIntoView({ behavior: 'smooth' });
+                    lastComment.classList.add('bg-green-50');
                     setTimeout(() => {
-                        lastComment.classList.remove('bg-green-50')
-                    }, 5000)
+                        lastComment.classList.remove('bg-green-50');
+                    }, 5000);
                 }
             })
         "

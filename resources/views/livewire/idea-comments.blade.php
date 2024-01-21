@@ -58,6 +58,9 @@
             </div> <!-- end comment-container --> --}}
 
         </div> <!-- end comments-container -->
+        <div class=" md:ml-22 my-8">
+            {{ $comments->links() }}
+        </div>
     @else
         <div class="mx-auto w-70 mt-12">
             <img src="{{ asset('img/no-ideas.svg') }}" alt="No Ideas" class="mx-auto" style="mix-blend-mode: luminosity">
