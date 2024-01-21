@@ -7,14 +7,15 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Idea extends Model
 {
     use HasFactory, Sluggable;
 
-    const PAGINATION_COUNT = 10;
-
     protected $guarded = [];
+
+    protected $perPage = 20;
 
     public function sluggable(): array
     {
@@ -28,6 +29,11 @@ class Idea extends Model
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function comments(): HasMany
+    {
+        return $this->hasMany(Comment::class);
     }
 
     public function category(): BelongsTo
