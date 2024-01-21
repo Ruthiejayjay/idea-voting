@@ -10,7 +10,7 @@ class IdeaComments extends Component
     public $idea;
 
     protected $listeners = ['commentWasAdded'];
-    
+
     public function commentWasAdded()
     {
         $this->idea->refresh();
@@ -24,7 +24,9 @@ class IdeaComments extends Component
     public function render()
     {
         return view('livewire.idea-comments', [
-            'comments' => $this->idea->comments,
+            'comments' => $this->idea->comments()
+                ->orderBy('id', 'desc')
+                ->get(),
         ]);
     }
 }
